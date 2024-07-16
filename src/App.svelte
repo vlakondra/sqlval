@@ -30,8 +30,8 @@
   ///home/vkondra/MyDevs/Svelte/sqlval/node_modules/@codemirror/lang-sql
   let value = "select * from table";
   console.log(sql);
-  let rs = sql();
-  console.log("rs", rs);
+  // let rs = sql();
+  // console.log("rs", rs);
   // import svelteLogo from "./assets/svelte.svg";
   // import viteLogo from "/vite.svg";
   // import Counter from "./lib/Counter.svelte";

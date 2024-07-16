@@ -5,11 +5,11 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 export default defineConfig({
   plugins: [svelte()],
 
-  resolve: {
-    alias: {
-      'sql': '/node_modules/@codemirror/lang-sql',
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     //'sql': '/node_modules/@codemirror/lang-sql',
+  //   },
+  // },
 
 
 
