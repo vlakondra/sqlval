@@ -1,28 +1,29 @@
 <script>
-  import { wasm } from "./store.js";
+  //import { wasm } from "./store.js";
   import createSqlWasm from "sql-wasm";
-  //console.log(wasm)
-  // (async () => {
-  //   const sql = await createSqlWasm({
-  //     wasmUrl: "node_modules/sql-wasm/dist/sqlite3.wasm",
-  //   });
-  //   // From here on, the SQL.js API can be used...
-  //   const db = new sql.Database();
-  //   console.log(db);
+  let dbb = null;
+  (async () => {
+    const sql = await createSqlWasm({
+      wasmUrl: "node_modules/sql-wasm/dist/sqlite3.wasm",
+    });
+    // From here on, the SQL.js API can be used...
+    const db = new sql.Database();
+    console.log(db);
 
-  //   // var db = new sql.Database();
-  //   // NOTE: You can also use new sql.Database(data) where
-  //   // data is an Uint8Array representing an SQLite database file
+    // var db = new sql.Database();
+    // NOTE: You can also use new sql.Database(data) where
+    // data is an Uint8Array representing an SQLite database file
 
-  //   // Execute some sql
-  //   let sqlstr = "CREATE TABLE hello (a int, b char);";
-  //   sqlstr += "INSERT INTO hello VALUES (0, 'hello');";
-  //   sqlstr += "INSERT INTO hello VALUES (1, 'world');";
-  //   db.run(sqlstr); // Run the query without returning anything
+    // Execute some sql
+    let sqlstr = "CREATE TABLE hello (a int, b char);";
+    sqlstr += "INSERT INTO hello VALUES (0, 'hello');";
+    sqlstr += "INSERT INTO hello VALUES (1, 'world');";
+    db.run(sqlstr); // Run the query without returning anything
 
-  //   var res = db.exec("SELECT * FROM hello");
-  //   console.log(res);
-  // })();
+    var res = db.exec("SELECT * FROM hello");
+    console.log(res);
+    dbb = db;
+  })();
 
   import CodeMirror from "svelte-codemirror-editor";
   // import { sql } from "/home/vkondra/MyDevs/Svelte/sqlval/node_modules/@codemirror/lang-sql";
@@ -34,22 +35,23 @@
   // let rs = sql();
   // console.log("rs", rs);
 
-  console.log("wasm", $wasm);
-  let db = null;
-  $wasm().then((v) => {
-    console.log(v);
-    let sqlstr = "CREATE TABLE hello (a int, b text);";
-    sqlstr += "INSERT INTO hello VALUES (0, 'hello');";
-    sqlstr += "INSERT INTO hello VALUES (1, 'world');";
-    v.run(sqlstr);
-    db = v;
+  // console.log("wasm", $wasm);
+  // let db = null;
+  // $wasm().then((v) => {
+  //   console.log(v);
+  //   let sqlstr = "CREATE TABLE hello (a int, b text);";
+  //   sqlstr += "INSERT INTO hello VALUES (0, 'hello');";
+  //   sqlstr += "INSERT INTO hello VALUES (1, 'world');";
+  //   v.run(sqlstr);
+  //   db = v;
 
-    var res = v.exec(value);
-    console.log(res);
-  });
-  console.log(db, "DB");
+  //   var res = v.exec(value);
+  //   console.log(res);
+  // });
+  // console.log(db, "DB");
+
   function onclick() {
-    var res = db.exec(value);
+    var res = dbb.exec(value);
     console.log(res);
   }
 </script>
