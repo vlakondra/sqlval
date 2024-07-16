@@ -10,7 +10,8 @@ export const wasm = readable(null, function start(set) {
     set(
         async () => {
             const sql = await createSqlWasm({
-                wasmUrl: "node_modules/sql-wasm/dist/sqlite3.wasm"
+                //wasmUrl: "node_modules/sql-wasm/dist/sqlite3.wasm"
+                wasmUrl: 'sqlite3.wasm'
             });
             const db = new sql.Database();
             return db
