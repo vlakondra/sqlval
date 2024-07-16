@@ -5,7 +5,15 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 export default defineConfig({
   plugins: [svelte()],
 
+  resolve: {
+    alias: {
+      'sql': '/node_modules/@codemirror/lang-sql',
+    },
+  },
+
+
+
   optimizeDeps: {
-    exclude: ["svelte-codemirror-editor", "codemirror", "@codemirror/language-javascript" /* ... */],
+    exclude: ["svelte-codemirror-editor", "codemirror", "@codemirror/language-sql" /* ... */],
   },
 })

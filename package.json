@@ -17,6 +17,7 @@
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/lang-sql": "^6.7.0",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "sql-wasm": "^1.1.4",
     "svelte-codemirror-editor": "^1.4.0"
   }
