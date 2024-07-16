@@ -13,7 +13,7 @@ export default defineConfig({
 
 
 
-  optimizeDeps: {
-    exclude: ["svelte-codemirror-editor", "codemirror", "@codemirror/language-sql" /* ... */],
-  },
+  // optimizeDeps: {
+  //   exclude: ["svelte-codemirror-editor", "codemirror", "@codemirror/language-sql" /* ... */],
+  // },
 })
