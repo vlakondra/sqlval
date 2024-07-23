@@ -1,43 +1,37 @@
 <script>
+  //SELECT name FROM sqlite_master WHERE type = "table"
+  //https://github.com/sql-js/sql.js/tree/master/examples
+
+  //import { test } from "./store";
+
+  import ggg from "./store";
+  import TestDdb from "./lib/testdb.svelte";
+  // // //console.log($test, "test");
+
+  import { mydb } from "./store";
+
   let sqlite;
   globalThis.sqlite3InitModule().then(function (sqlite3) {
-    // The module is now loaded and the sqlite3 namespace
-    // object was passed to this function.
     console.log("sqlite3:", sqlite3);
     globalThis.sqlite3 = sqlite3;
     sqlite = sqlite3; //??
+    ggg();
   });
-  console.log("SQL", sqlite);
-  //import { wasm } from "./store.js";
-  // import createSqlWasm from "sql-wasm";
-  // let dbb = null;
-  // (async () => {
-  //   const sql = await createSqlWasm({
-  //     wasmUrl: "node_modules/sql-wasm/dist/sqlite3.wasm",
-  //   });
-  //   // From here on, the SQL.js API can be used...
-  //   const db = new sql.Database();
-  //   console.log(db);
-
-  //   // var db = new sql.Database();
-  //   // NOTE: You can also use new sql.Database(data) where
-  //   // data is an Uint8Array representing an SQLite database file
-
-  //   // Execute some sql
-
-  // })();
+  //setTimeout(() => console.log($mydb, "mydb"), 1000);
 
   import CodeMirror from "svelte-codemirror-editor";
-  // import { sql } from "/home/vkondra/MyDevs/Svelte/sqlval/node_modules/@codemirror/lang-sql";
   import { sql } from "@codemirror/lang-sql";
-  let value = "select * from hello";
-  console.log(sql);
+  import Testdb from "./lib/testdb.svelte";
+  let value = "select * from actor limit 10";
 
-  let db;
+  // let db;
+  // let sqlite;
   async function onclick() {
-    console.log(globalThis.sqlite3);
+    // console.log(globalThis.sqlite3);
     const capi = globalThis.sqlite3.capi /*C-style API*/,
       oo = globalThis.sqlite3.oo1;
+
+    sqlite = globalThis.sqlite3;
 
     console.log("OO", oo);
     console.log(
@@ -50,6 +44,7 @@
       res.arrayBuffer(),
     );
     const buf = await Promise.all([dataPromise]);
+
     console.log("BUF", buf);
 
     const p = await sqlite.wasm.allocFromTypedArray(buf[0]);
@@ -69,11 +64,11 @@
     );
     console.log("RC", rc);
     let res = db.checkRc(rc);
-    console.log(res, db);
+    console.log("DB", db);
 
     let rR = [];
     db.exec({
-      sql: "SELECT * FROM actor",
+      sql: "select * from pragma_table_info('actor')",
       rowMode: "object",
       resultRows: rR,
     });
@@ -120,11 +115,52 @@
       }.bind({ counter: 0 }),
     });
   }
+
+  function onbtn() {
+    let rR = [];
+    $mydb.exec({
+      sql: "select * from pragma_table_info('actor')",
+      rowMode: "object",
+      resultRows: rR,
+    });
+    console.log(rR);
+  }
+  function gd(d) {
+    console.log("gd", d);
+    //return d;
+  }
+  $: tt = gd;
+  function onnew() {
+    let rR = [];
+    $mydb.exec({
+      //sql: "select * from pragma_table_info('actor')",
+      sql: value,
+      rowMode: "object",
+      resultRows: rR,
+    });
+    gd(rR);
+  }
 </script>
 
 <main>
-  <div style="border: 1px solid red">
-    <CodeMirror bind:value lang={sql()} />
+  <div style="border: 1px solid red; width:100%">
+    <CodeMirror
+      bind:value
+      styles={{
+        "&": {
+          width: "100%",
+          minWidth: "100%",
+          height: "15rem",
+          background: "red",
+        },
+      }}
+      lang={sql()}
+    />
+  </div>
+  <div><Testdb /></div>
+
+  <div>
+    <button on:click={onnew}>NEW</button>
   </div>
   <div>
     <button on:click={onclick}>Click</button>
@@ -132,7 +168,16 @@
   <div>
     <button on:click={oncreate}>create</button>
   </div>
+  <div>
+    <button on:click={onbtn}>mytest</button>
+  </div>
 </main>
 
 <style>
+  main {
+    width: 100%;
+  }
+  :global(.cm-editor) {
+    width: 100%;
+  }
 </style>
