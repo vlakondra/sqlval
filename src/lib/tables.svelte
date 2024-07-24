@@ -14,7 +14,7 @@
             },
         });
         console.log("tbls", tbls);
-    }, 5150);
+    }, 1150);
     // });
 
     //setTimeout(() => console.log($mydb), 500);
