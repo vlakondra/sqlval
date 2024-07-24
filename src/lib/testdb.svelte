@@ -34,6 +34,7 @@
 <style>
     .result-data {
         max-width: 300px;
+        max-height: 400px;
         margin: 0 5px;
     }
     table,
