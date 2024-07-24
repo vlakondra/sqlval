@@ -8,10 +8,8 @@
   import { mydb } from "./store";
 
   globalThis.sqlite3InitModule().then(async function (sqlite3) {
-    console.log(new Date());
     globalThis.sqlite3 = sqlite3;
     await IniWasm();
-    console.log(new Date());
     console.log("iniwasm", $mydb);
   });
 
@@ -52,7 +50,7 @@
   .container-opt {
     display: flex;
     flex-direction: column;
-    border: 1px solid silver;
+    border: 1px solid rgb(212, 209, 209);
   }
   .caption {
     font-size: 2em;
