@@ -4,7 +4,8 @@
     let tbls = [];
 
     setTimeout(() => {
-        console.log("db", $mydb);
+        console.log("db-1", $mydb);
+
         $mydb.exec({
             sql: "SELECT name FROM sqlite_master WHERE type = 'table'",
             rowMode: "object",
@@ -13,7 +14,7 @@
             },
         });
         console.log("tbls", tbls);
-    }, 1500);
+    }, 5150);
     // });
 
     //setTimeout(() => console.log($mydb), 500);

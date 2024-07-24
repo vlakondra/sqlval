@@ -5,10 +5,14 @@
   ////sql: "select * from pragma_table_info('actor') ",
   //https://github.com/sql-js/sql.js/tree/master/examples
   import IniWasm from "./store";
+  import { mydb } from "./store";
 
-  globalThis.sqlite3InitModule().then(function (sqlite3) {
+  globalThis.sqlite3InitModule().then(async function (sqlite3) {
+    console.log(new Date());
     globalThis.sqlite3 = sqlite3;
-    IniWasm();
+    await IniWasm();
+    console.log(new Date());
+    console.log("iniwasm", $mydb);
   });
 
   import CodeEditor from "./lib/codeedit.svelte";
