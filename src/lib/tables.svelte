@@ -2,25 +2,13 @@
     import { mydb } from "../store";
     export let setqueryfunc;
     let tbls = [];
-    console.log($mydb, "mydb");
-    // let db;
 
-    // mydb.subscribe((value) => {
-    //     db = value;
-    // });
-
-    //const promise1 = Promise.resolve(mydb);
-
-    // promise1.then((value) => {
-    //     console.log(value);
     setTimeout(() => {
         console.log("db", $mydb);
         $mydb.exec({
             sql: "SELECT name FROM sqlite_master WHERE type = 'table'",
             rowMode: "object",
             callback: function (value) {
-                console.log(value);
-                //tbls.push(value.name);
                 tbls = [...tbls, value.name];
             },
         });
@@ -43,13 +31,34 @@
 
 <!-- SELECT name FROM sqlite_master WHERE type = "table" -->
 
-<div>
-    qq {tbls.length}
-    {#if tbls.length > 0}
-        {#each tbls as item}
-            <div on:click={() => setqueryfunc(item)}>
-                {item}
-            </div>
-        {/each}
-    {/if}
+<div style="">
+    <div class="pb-1 bg-[#ffe6e6] font-semibold">
+        <div class="ml-2 text-lg">БД Sakila</div>
+        <div class="ml-2">Таблицы:</div>
+    </div>
+    <div style="width:75%;margin:10px auto;">
+        {#if tbls.length > 0}
+            {#each tbls as item}
+                <div
+                    class="font-semibold table-link"
+                    on:click={() => setqueryfunc(item)}
+                >
+                    {item}
+                </div>
+            {/each}
+        {/if}
+    </div>
 </div>
+
+<style>
+    .table-link {
+        cursor: pointer;
+        /* font-weight: 500; */
+        /* color: #646cff; */
+        /* text-decoration: inherit; */
+    }
+    .table-link:hover {
+        color: #535bf2;
+        border-bottom: 1px solid #646cff;
+    }
+</style>
