@@ -7,17 +7,31 @@
   import IniWasm from "./store";
   import { mydb } from "./store";
 
-  globalThis.sqlite3InitModule().then(async function (sqlite3) {
-    globalThis.sqlite3 = sqlite3;
-    await IniWasm();
-    console.log("iniwasm", $mydb);
-  });
+  let testarr = [];
+
+  async function start() {
+    await globalThis.sqlite3InitModule().then(async function (sqlite3) {
+      globalThis.sqlite3 = sqlite3;
+
+      await IniWasm();
+
+      $mydb.exec({
+        sql: "SELECT name FROM sqlite_master WHERE type = 'table'",
+        rowMode: "object",
+        callback: function (value) {
+          testarr = [...testarr, value.name];
+        },
+      });
+    });
+  }
 
   import CodeEditor from "./lib/codeedit.svelte";
   import Testdb from "./lib/testdb.svelte";
   import Tables from "./lib/tables.svelte";
-  let result = [];
 
+  start();
+
+  let result = [];
   function showresult(data) {
     result = data;
   }
@@ -33,7 +47,7 @@
   <div class="caption">SQL-тренажер</div>
   <div class="content">
     <div class="menu">
-      <Tables setqueryfunc={setquery}></Tables>
+      <Tables testdata={testarr} setqueryfunc={setquery}></Tables>
     </div>
     <div class="analisis">
       <div class="editor">

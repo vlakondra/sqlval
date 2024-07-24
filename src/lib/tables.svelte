@@ -1,45 +1,33 @@
 <script>
-    import { mydb } from "../store";
+    // import { mydb } from "../store";
     export let setqueryfunc;
-    let tbls = [];
+    export let testdata;
+    // let tbls = [];
 
-    setTimeout(() => {
-        console.log("db-1", $mydb);
-
-        $mydb.exec({
-            sql: "SELECT name FROM sqlite_master WHERE type = 'table'",
-            rowMode: "object",
-            callback: function (value) {
-                tbls = [...tbls, value.name];
-            },
-        });
-        console.log("tbls", tbls);
-    }, 1150);
-    // });
-
-    //setTimeout(() => console.log($mydb), 500);
-
-    // onMount(() => {
-    //     console.log($mydb);
+    // setTimeout(() => {
+    //     console.log("db-1", $mydb);
+    //     console.log(testdata);
     //     $mydb.exec({
-    //         sql: 'SELECT name FROM sqlite_master WHERE type = "table"',
+    //         sql: "SELECT name FROM sqlite_master WHERE type = 'table'",
     //         rowMode: "object",
-    //         resultRows: tbls,
+    //         callback: function (value) {
+    //             tbls = [...tbls, value.name];
+    //         },
     //     });
     //     console.log("tbls", tbls);
-    // });
+    // }, 1150);
 </script>
 
 <!-- SELECT name FROM sqlite_master WHERE type = "table" -->
 
-<div style="">
+<div>
     <div class="pb-1 bg-[#ffe6e6] font-semibold">
         <div class="ml-2 text-lg">БД Sakila</div>
         <div class="ml-2">Таблицы:</div>
     </div>
-    <div style="width:75%;margin:10px auto;">
-        {#if tbls.length > 0}
-            {#each tbls as item}
+    <div class="tablelist">
+        {#if testdata.length > 0}
+            {#each testdata as item}
                 <div
                     class="font-semibold table-link"
                     on:click={() => setqueryfunc(item)}
@@ -54,9 +42,10 @@
 <style>
     .table-link {
         cursor: pointer;
-        /* font-weight: 500; */
-        /* color: #646cff; */
-        /* text-decoration: inherit; */
+    }
+    .tablelist {
+        width: 75%;
+        margin: 10px auto;
     }
     .table-link:hover {
         color: #535bf2;

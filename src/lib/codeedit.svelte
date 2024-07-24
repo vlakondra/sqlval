@@ -24,7 +24,7 @@
     }
 </script>
 
-<div style="border: 1px solid red; position:relative; width:100%">
+<div class="editor-wrapper">
     <CodeMirror
         bind:value
         styles={{
@@ -44,6 +44,11 @@
         width: 100%;
         font-size: 1.1em;
     }
+
+    .editor-wrapper {
+        border: 1px solid #7981e2;
+        position: relative;
+    }
     .runbutton {
         position: absolute;
         bottom: 10px;
@@ -54,8 +59,6 @@
         padding: 0.6em 1.2em;
         font-size: 1em;
         font-weight: 500;
-        font-family: inherit;
-        /* background-color: #1a1a1a; */
         cursor: pointer;
         transition: border-color 0.25s;
     }

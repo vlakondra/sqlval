@@ -27,7 +27,7 @@ export default async function () {
         );
 
         console.log('store', db)
-        mydb.set(db)
+        mydb.set(await db)
     }
 
     await Iniwasm()

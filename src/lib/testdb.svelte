@@ -35,8 +35,6 @@
     .result-data {
         max-width: 300px;
         margin: 0 5px;
-        /* min-height: 100%;
-        border: 1px solid silver; */
     }
     table,
     th,
