@@ -13,7 +13,7 @@
             },
         });
         console.log("tbls", tbls);
-    }, 800);
+    }, 1500);
     // });
 
     //setTimeout(() => console.log($mydb), 500);
