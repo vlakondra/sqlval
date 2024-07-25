@@ -26,7 +26,6 @@ export default async function () {
             // | capi.SQLITE_DESERIALIZE_RESIZEABLE
         );
 
-        console.log('store', db)
         mydb.set(await db)
     }
 

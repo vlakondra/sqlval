@@ -1,8 +1,6 @@
 <script>
   import "./app.css";
 
-  //SELECT name FROM sqlite_master WHERE type = "table"
-  ////sql: "select * from pragma_table_info('actor') ",
   //https://github.com/sql-js/sql.js/tree/master/examples
   import IniWasm from "./store";
   import { mydb } from "./store";
@@ -26,7 +24,7 @@
   }
 
   import CodeEditor from "./lib/codeedit.svelte";
-  import Testdb from "./lib/testdb.svelte";
+  import Results from "./lib/results.svelte";
   import Tables from "./lib/tables.svelte";
 
   start();
@@ -54,7 +52,7 @@
         <CodeEditor showresultfunc={showresult} {querytext}></CodeEditor>
       </div>
       <div class="result">
-        <Testdb queryresult={result}></Testdb>
+        <Results queryresult={result} />
       </div>
     </div>
   </div>

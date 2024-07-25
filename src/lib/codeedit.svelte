@@ -4,9 +4,9 @@
     import { sql } from "@codemirror/lang-sql";
 
     export let querytext;
-    $: value = querytext;
-
     export let showresultfunc;
+
+    $: value = querytext;
 
     function onclick() {
         let rR = [];
@@ -18,7 +18,7 @@
             });
             showresultfunc(rR);
         } catch (e) {
-            showresultfunc([{ error: e.message }]);
+            showresultfunc([{ Ошибка: e.message }]);
             console.log("err", e.message);
         }
     }
